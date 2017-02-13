@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Created by hzlbo on 2017/1/24 0024.\
  * 使用@FeignClient("compute-service")注解来绑定该接口对应compute-service服务
+ * <p>
+ * fallback添加熔断器实现类
  */
-@FeignClient("compute-service")
+@FeignClient(value = "compute-service", fallback = ComputeClientHystrix.class)
 public interface ComputeClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/add")
