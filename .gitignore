@@ -52,3 +52,5 @@ crashlytics-build.properties
 .project
 /bin/
 target/
+/liubo-calculate/.mvn/wrapper/maven-wrapper.properties
+/liubo-calculate/.mvn/wrapper/maven-wrapper.jar
