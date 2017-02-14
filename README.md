@@ -25,3 +25,5 @@ liubo-ribbon 和liubo-feign使用断路器
 config的相关配置会先于application.properties
 bootstrap.properties的加载也是先于application.properties
 ```
+## 服务网关
+[liubo-zuul](https://github.com/liubo6/spring-cloud-microservices/tree/master/liubo-zuul)
