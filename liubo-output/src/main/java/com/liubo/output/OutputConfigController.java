@@ -12,11 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OutputConfigController {
 
+    @Value("${env}")
+    private String env;
+
+    @Value("${name}")
+    private String name;
+
     @Value("${url}")
     private String url;
 
+
     @RequestMapping("/get")
     public String getContent() {
-        return this.url;
+        return this.env + "|" + this.url + "|" + this.name;
     }
 }
