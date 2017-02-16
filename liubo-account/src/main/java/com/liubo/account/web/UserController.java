@@ -3,6 +3,8 @@ package com.liubo.account.web;
 import com.liubo.account.model.AccountResult;
 import com.liubo.account.model.UserDO;
 import com.liubo.account.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by hzlbo on 2017/2/16 0016.
  */
+@Api(description = "用户相关接口")
 @RestController
 public class UserController {
 
@@ -20,11 +23,14 @@ public class UserController {
 
     /**
      * 用户注册
+     * http://localhost:8080/swagger-ui.html
      *
      * @param userDO
      * @return
      */
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ApiOperation(notes = "用户注册", value = "用户注册", httpMethod = "POST")
     public String register(@RequestBody UserDO userDO) {
         return userService.register(userDO).toString();
     }
