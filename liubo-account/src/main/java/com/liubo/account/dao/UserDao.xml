@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liubo.account.dao.UserDao">
+
+    <sql id="column">
+      id,userId,userName,phone,email,userStatus,registerTime,country,province,city,address,ip,createDate,updateDate
+    </sql>
+    <insert id="insertUser" parameterType="com.liubo.account.model.UserDO">
+      INSERT INTO user(id,userId,userName,password,phone,email,userStatus,registerTime,country,province,city,address,ip,createDate,updateDate)
+      VALUES (#{id},#{userId},#{userName},#{password},#{phone},#{email},#{userStatus},NOW(),#{country},#{province},#{city},#{address},#{ip},NOW(),NOW())
+    </insert>
+
+    <select id="getUserByPhone" parameterType="string" resultType="com.liubo.account.model.UserDO">
+        SELECT
+        <include refid="column"/>
+        FROM user
+        WHERE phone =#{phone}
+    </select>
+
+    <select id="getPwdByPhone" parameterType="string" resultType="string">
+        SELECT password
+        FROM user
+        WHERE phone =#{phone}
+    </select>
+
+    <select id="existPhone" parameterType="string" resultType="int">
+        SELECT count(*) FROM user WHERE phone=#{phone}
+    </select>
+</mapper>
