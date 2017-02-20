@@ -3,7 +3,7 @@
 <mapper namespace="com.liubo.account.dao.UserDao">
 
     <sql id="column">
-      id,userId,userName,phone,email,userStatus,registerTime,country,province,city,address,ip,createDate,updateDate
+      userId,userName,phone,email,userStatus,registerTime,country,province,city,address,ip,createDate,updateDate
     </sql>
     <insert id="insertUser" parameterType="com.liubo.account.model.UserDO">
       INSERT INTO user(id,userId,userName,password,phone,email,userStatus,registerTime,country,province,city,address,ip,createDate,updateDate)

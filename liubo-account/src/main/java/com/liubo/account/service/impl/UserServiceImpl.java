@@ -7,6 +7,7 @@ import com.liubo.account.model.UserDO;
 import com.liubo.account.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -116,5 +117,20 @@ public class UserServiceImpl implements UserService {
         }
 
         return AccountResult.falseResult("用户未登录");
+    }
+
+    /**
+     * 查询用户信息
+     *
+     * @param phone
+     * @return
+     */
+    @Cacheable(value = "userCache", key = "'USER:INFO:'+#phone")
+    @Override
+    public UserDO getUserByPhone(String phone) {
+        if (StringUtils.isEmpty(phone)) {
+            return new UserDO();
+        }
+        return userDao.getUserByPhone(phone);
     }
 }

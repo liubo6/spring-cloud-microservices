@@ -31,4 +31,12 @@ public interface UserService {
      * @return
      */
     AccountResult checkLogin(String token);
+
+    /**
+     * 查询用户信息
+     *
+     * @param phone
+     * @return
+     */
+    UserDO getUserByPhone(String phone);
 }

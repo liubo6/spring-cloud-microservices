@@ -63,4 +63,16 @@ public class UserController {
     public String checkLogin(@CookieValue(value = "token", defaultValue = "none") String token) {
         return userService.checkLogin(token).toString();
     }
+
+
+    /**
+     * 根据手机号码查询用户信息
+     *
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+    public UserDO getUserInfo(@RequestParam("phone") String phone) {
+        return userService.getUserByPhone(phone);
+    }
 }
