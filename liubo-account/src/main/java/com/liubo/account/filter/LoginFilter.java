@@ -2,6 +2,7 @@ package com.liubo.account.filter;
 
 import com.liubo.account.JJWTUtil;
 import io.jsonwebtoken.Claims;
+import org.springframework.data.redis.RedisConnectionFailureException;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -48,9 +49,12 @@ public class LoginFilter implements Filter {
                     try {
                         Claims claims = new JJWTUtil().parseJWT(autoCookie.getValue());
                         filterChain.doFilter(servletRequest, servletResponse);
+                    } catch (RedisConnectionFailureException e) {
+
                     } catch (Exception e) {
                         OutputStream out = rsp.getOutputStream();
                         out.write("请登录".getBytes());
+                        e.printStackTrace();
                         rsp.setStatus(401);
                         return;
                     }

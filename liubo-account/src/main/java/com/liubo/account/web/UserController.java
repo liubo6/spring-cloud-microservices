@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by hzlbo on 2017/2/16 0016.
@@ -75,4 +76,15 @@ public class UserController {
     public UserDO getUserInfo(@RequestParam("phone") String phone) {
         return userService.getUserByPhone(phone);
     }
+
+    /**
+     * 查询所有用户
+     *
+     * @return
+     */
+    @RequestMapping(value = "/userList", method = RequestMethod.GET)
+    public List<UserDO> getUserList(@CookieValue(value = "token", defaultValue = "none") String token) {
+        return userService.selectUsers();
+    }
+
 }

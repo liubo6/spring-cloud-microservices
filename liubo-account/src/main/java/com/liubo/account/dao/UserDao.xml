@@ -26,4 +26,9 @@
     <select id="existPhone" parameterType="string" resultType="int">
         SELECT count(*) FROM user WHERE phone=#{phone}
     </select>
+
+    <select id="selectUsers" resultType="com.liubo.account.model.UserDO">
+        SELECT userId,userName,phone,email,userStatus,registerTime,country,province,city,address,ip,createDate,updateDate
+        FROM user
+    </select>
 </mapper>

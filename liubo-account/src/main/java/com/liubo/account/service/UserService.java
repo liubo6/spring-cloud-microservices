@@ -3,6 +3,8 @@ package com.liubo.account.service;
 import com.liubo.account.model.AccountResult;
 import com.liubo.account.model.UserDO;
 
+import java.util.List;
+
 /**
  * Created by hzlbo on 2017/2/16 0016.
  */
@@ -39,4 +41,11 @@ public interface UserService {
      * @return
      */
     UserDO getUserByPhone(String phone);
+
+    /**
+     * 查询所有用户
+     *
+     * @return
+     */
+    List<UserDO> selectUsers();
 }

@@ -7,6 +7,7 @@ import com.liubo.account.model.UserDO;
 import com.liubo.account.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserService {
      * @param userDO
      * @return
      */
+    @CacheEvict(value = "userCache", key = "'USER:INFO:'+#userDO.phone", allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     @Override
     public AccountResult register(UserDO userDO) {
@@ -132,5 +135,15 @@ public class UserServiceImpl implements UserService {
             return new UserDO();
         }
         return userDao.getUserByPhone(phone);
+    }
+
+    /**
+     * 查询所有用户
+     *
+     * @return
+     */
+    @Override
+    public List<UserDO> selectUsers() {
+        return userDao.selectUsers();
     }
 }
